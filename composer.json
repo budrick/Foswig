@@ -1,0 +1,21 @@
+{
+    "name": "mudbrick/foswig",
+    "description": "Re-implementation in PHP of Foswig.js Markov text generator",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mudbrick",
+            "email": "me@mudbrick.org"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Textfox\\Foswig\\": "src/"
+        }
+    },
+}
