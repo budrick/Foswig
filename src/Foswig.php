@@ -42,28 +42,36 @@ class Foswig
         $prev->addNeighbor(null);
     }
 
-    public function generateWord($min = 1, $max = 10, $allowDuplicates = true, $maxAttempts = 5)
+    public function generateWord($min = 3, $max = 10, $allowDuplicates = true, $maxAttempts = 25)
+    {
+        $attempts = 0;
+        do {
+            $word = $this->generateFixedWord(random_int($min, $max));
+            $isDuplicate = $this->duplicates->isDuplicate($word);
+            $attempts++;
+        } while (!$allowDuplicates && $isDuplicate && $attempts < $maxAttempts);
+
+        if ($attempts >= $maxAttempts && !$allowDuplicates && $isDuplicate) {
+            return false;
+            // throw new \Exception("Could not generate a word with the given parameters in $attempts or fewer attempts.");
+        }
+
+        return $word;
+    }
+
+    /**
+     * Create a fixed-length word from
+     */
+    public function generateFixedWord($length = 5)
     {
         $word = '';
-        $repeat = false;
-        $attempts = 0;
-
-        do {
-            $repeat = false;
-
-            $currentnode = $this->start->getRandomNeighbor();
-
-            while ($currentnode && ($max < 0 || mb_strlen($word) <= $max)) {
-                $word .= $currentnode->getCharacter();
-                $currentnode = $currentnode->getRandomNeighbor();
-
-                if (mb_strlen($word) > $max || mb_strlen($word) < $min) {
-                    $repeat = true;
-                }
+        $currentNode = $this->start->getRandomNeighbor();
+        while (mb_strlen($word) < $length) {
+            while ($currentNode && mb_strlen($word) < $length) {
+                $word .= $currentNode->getCharacter();
+                $currentNode = $currentNode->getRandomNeighbor();
             }
-        } while ($repeat || (!$allowDuplicates && ++$attempts < $maxAttempts && $this->duplicates->isDuplicate($word)));
-        if ($attempts >= $maxAttempts) {
-            throw new Exception('Could not generate a word after ' . $attempts . ' attempts');
+            $currentNode = $this->start->getRandomNeighbor();
         }
         return $word;
     }

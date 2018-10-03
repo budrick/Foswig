@@ -16,16 +16,16 @@ final class FoswigTest extends TestCase
 
     public function testCanCreateWord(): void
     {
-        $f = new Foswig(1);
+        $f = new Foswig();
         $f->addWordsToChain(['test', 'toast', 'taste', 'trieste']);
-        $this->assertNotEmpty($f->generateWord(50));
+        $this->assertNotEmpty($f->generateWord(10, 20));
     }
 
     public function testMinLength(): void
     {
         $f = new Foswig();
         $f->addWordsToChain(['test', 'toast', 'taste', 'trieste']);
-        $this->assertGreaterThanOrEqual(10, mb_strlen($f->generateWord(10)));
+        $this->assertGreaterThanOrEqual(10, mb_strlen($f->generateWord(10, 20)));
     }
 
     public function testMaxLength(): void
