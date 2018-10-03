@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Textfox\Foswig\Foswig;
+use Mudbrick\Foswig\Foswig;
 
 final class FoswigTest extends TestCase
 {

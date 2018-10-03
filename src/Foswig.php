@@ -1,5 +1,5 @@
 <?php
-namespace Textfox\Foswig;
+namespace Mudbrick\Foswig;
 
 class Foswig
 {

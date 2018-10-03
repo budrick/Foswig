@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Textfox\\Foswig\\": "src/"
+            "Mudbrick\\Foswig\\": "src/"
         }
     },
     "require-dev": {
